@@ -63,7 +63,7 @@
                                                 <input type="submit" class="btn btn-primary" value="update" id="myButton" onclick="updateCart(this)" name="btn">
                                               
                                             </td>
-                                            <td data-th="Subtotal" class="text-center">{{$v_cart->options->discount}}BDT</td>
+                                            <td data-th="Subtotal" class="text-center">{{$v_cart->options->discount}}%</td>
 
                                             <td data-th="Subtotal" class="text-center">{{$total = $v_cart->price * $v_cart->qty }}BDT</td>
                                             <td class="actions" data-th="">

@@ -22,8 +22,11 @@ class CartController extends Controller
             'price' => $product->product_price,
             'weight' => 550,
             'options' =>
-            ['image' => $product->product_image],
-            ['discount' => $product->discount],
+            [
+            'image' => $product->product_image,
+            'discount' => $product->discount
+            ],
+           
 
             ]);
         //     return back();
@@ -41,6 +44,7 @@ class CartController extends Controller
     public function show_cart()
     {   
         $cart = Cart::content();
+        // print_r($cart);
         $total = Cart::subtotal();
         return view('Client.cart.cart',[
             'cart' => $cart,

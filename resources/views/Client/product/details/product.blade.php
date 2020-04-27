@@ -7,7 +7,7 @@
     <div class="container">
         <div class="card mb-4">
             <!--<div class="container-fliud">-->
-            <h3 class="text-center text-success">{{Session::get('message')}}</h3>
+            <h3 class="text-center text-success"></h3>
             <div class="wrapper row">
                 <div class="preview col-md-4">
 
@@ -82,11 +82,11 @@
                     </div>
 
                     <div class="action mt-3">
-                        <a href="cart.html" type="button" class="add-to-cart btn btn-default">ORDER NOW</a>
+                        {{-- <a type="button" class="add-to-cart btn btn-default">ORDER NOW</a> --}}
 
-                        <input type="hidden" name="id" value="{{$product->id}}">
-                        <input type="hidden" name="qty" value="1" value="min">
-                        <button type="button" class="btn btn-outline-default">ADD TO CART</button>
+                        <input type="hidden" id="proid"name="id" value="{{$product->id}}">
+                        <input type="hidden" id="qty" name="qty" value="1" value="min">
+                        <button type="button" class="btn btn-outline-default" onclick="addToCart(this)">ADD TO CART</button>
 
                         <!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
                         {{-- </button> --}}
@@ -598,7 +598,9 @@
         });
 
     </script>
-
+  <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
+  <script src="{{asset('client/assets/js/custom/api.js')}}"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 
 @endsection

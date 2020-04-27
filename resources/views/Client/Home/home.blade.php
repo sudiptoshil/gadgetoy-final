@@ -104,7 +104,7 @@
                                                 </div>
                                                 {{-- <form action="{{route('add-to-cart')}}" method="post"> --}}
                                                     <div class="thumb-content">
-                                                        <h4>{{$product->product_name}}</h4>
+                
                                                         <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
                                                         <input type="hidden" id="proid"value="{{$product->id}}">
                                                         <input type="hidden" id="qty" value="1" min="1" name="qty">
@@ -138,7 +138,7 @@
                                                          class="img-responsive img-fluid" alt="">
                                                 </div>
                                                 <div class="thumb-content">
-                                                    <h4>{{$product->product_name}}</h4>
+                                                   
                                                     <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
                                                     <input type="hidden" id="proid" value="{{$product->id}}"/>
                                                     <input type="hidden" id="qty" value="{{$product->id}}"/>
@@ -261,7 +261,7 @@
                                                     {{-- <input type="hidden" value="{{$product->product_name}}"> --}}
                                                     <input type="hidden" id="proid"value="{{$product->id}}" name="id">
                                                     <input type="hidden" id="qty"value="1" min="1" name="qty">
-                                                    <h4>{{$product->product_name}}</h4>
+                                                    
                                                     <button onclick="addToCart(this)">
                                                         <span class="ion-ios-cart"></span>
                                                     </button>

@@ -99,20 +99,21 @@
                         <!--<div class="boxed">-->
                         @foreach($products as $product)
                         <div class="col-sm-3">
-                            <form action="{{route('add-to-cart')}}" method="post">
-                                @csrf
+                            {{-- <form action="{{route('add-to-cart')}}" method="post">
+                                @csrf --}}
                             <div class="shop-box">
                                 <div class="product-badge">10% OFF</div>
                                 <img class="img-full img-responsive" src="{{asset($product->product_image)}}" alt="shop">
                                 <div class="shop-box-hover text-center">
                                     <div class="c-table">
                                         <div class="c-cell">
-                                            <input type="hidden" name="id" value="{{$product->id}}">
-                                            <input type="hidden" name="qty" value="1" value="min">
+                                            <h4>{{$product->product_name}}</h4>
+                                            <input type="hidden" id="proid" name="proid" value="{{$product->id}}">
+                                            <input type="hidden" id="qty" name="qty" value="1" value="min">
                                             <a href="{{route('product',['id'=>$product->id,'category_id'=>$product->category_id])}}">
                                                 <span class="ion-ios-information"></span>
                                             </a>
-                                            <button >
+                                            <button onclick="addToCart(this)">
                                                 <span class="ion-ios-cart"></span>
                                             </button>
                                         </div>
@@ -139,7 +140,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </form>
+                            {{-- </form> --}}
                         </div>
                         @endforeach
 
@@ -178,4 +179,9 @@
             <!--right-column-->
         </div>
     </section>
+    <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
+    <script src="{{asset('client/assets/js/custom/api.js')}}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+
 @endsection
