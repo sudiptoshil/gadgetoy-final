@@ -105,6 +105,58 @@ function orderCheckout(v){
 }
 
 
+// ------------------------------------------
+function increaseValue() {
+    var value = parseInt(document.getElementById('qty').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById('qty').value = value;
+
+  }
+
+
+  
+  function decreaseValue() {
+    var value = parseInt(document.getElementById('qty').value, 10);
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? value = 1 : '';
+    value--;
+    document.getElementById('qty').value = value;
+
+
+  }
+
+// ------------------------------------------
+
+// $(document).ready(function(){
+//     setInterval(function(){
+//           $("#here").load(window.location.href + " #here" );
+//     }, 3);
+//     });
+
+
+function addToCart(v){
+    let proid=$("#proid").val();
+    let qty=$("#qty").val();
+    // alert(id);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    // alert(rowId);
+    $.ajax({
+        type: 'POST',
+        //dataType: 'json',
+        url: "./add-to-cart",
+        data: {proid:proid,qty:qty},
+        success: function (data) {
+        alert("cart added successfully!!");
+        }
+    });
+}
+
+
 function updateCart(v){
    
     let rowId=$("#rowId").val();
@@ -126,9 +178,6 @@ function updateCart(v){
         }
     });
         
-    
-
-
 }
 
 const isActiveNextStep=(activePanelNum,eventTarget,DOMstrings)=>{

@@ -14,18 +14,19 @@ class CartController extends Controller
     public function add_to_cart(Request $request)
     {
         // return $request->all();
-        $product = Product::find($request->id);
+        $product = Product::find($request->proid);
         Cart::add([
-            'id' => $request->id,
+            'id' => $request->proid,
             'name' => $product->product_name,
             'qty' => $request->qty,
             'price' => $product->product_price,
             'weight' => 550,
             'options' =>
             ['image' => $product->product_image],
+            ['discount' => $product->discount],
 
             ]);
-            return back();
+        //     return back();
 
     }
 
@@ -38,15 +39,13 @@ class CartController extends Controller
     }
 
     public function show_cart()
-    {
+    {   
         $cart = Cart::content();
         $total = Cart::subtotal();
         return view('Client.cart.cart',[
             'cart' => $cart,
             'total' => $total,
-            // Session::put('total',$total)
         ]);
-
         // return $cart;
     }
 

@@ -1,5 +1,5 @@
 <section id="header" class="main-header">
-    <div class="container-fluid">
+    <div class="container-fluid" id="autor">
 
         <nav id="navbar-head-top" class="navbar navbar-expand-lg navbar-light">
             <a href="{{route('/')}}"><img src="{{asset('client/assets/images/logo.png')}}" alt="logo"></a>
@@ -165,3 +165,18 @@
     </div> <!-- /.container -->
     <div class="nutral"></div>
 </section> <!-- /#header -->
+<script> 
+    // $(document).ready(function(){
+    // setInterval(function(){
+    //       $("#here").load(window.location.href + " #here" );
+    // }, 3);
+    // });
+
+    let autorefresh =
+        setInterval(function(){
+          $("#autor").load(window.location.href + " #autor" );
+    },8000);
+    
+
+
+     </script>

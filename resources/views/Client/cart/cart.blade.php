@@ -26,7 +26,7 @@
                         <form class="multisteps-form__form">
                             <!--single form panel - cart panel-->
 
-                            <div class="multisteps-form__panel p-4 rounded bg-white js-active" data-animation="scaleIn">
+                            <div class="multisteps-form__panel p-4 rounded bg-white js-active" data-animation="scaleIn" id="here">
                                 <h3 class="text-center mb-2">GADGETOY CART</h3>
                                 <!--<p class="text-center lead mb-4">Search Through 1000+ Gadgets, Book Your Desired Product. Get Delivered. </p>-->
                                 <h4 style="color:red" align='center'>{{Session::get('message')}}</h4>
@@ -36,6 +36,7 @@
                                         <th style="width:50%">Product</th>
                                         <th style="width:10%">Price</th>
                                         <th style="width:8%">Quantity</th>
+                                        <th style="width:8%">Discount</th>
                                         <th style="width:22%" class="text-center">Subtotal</th>
                                         <th style="width:10%"></th>
                                     </tr>
@@ -59,16 +60,17 @@
                                                 
                                                 <input type="number" class="form-control text-center" id="qty" name="qty" value="{{$v_cart->qty}}">
                                                 <input type="hidden" class="form-control text-center" id="rowId" name="rowId" value="{{$v_cart->rowId}}">
-                                                <input type="submit" class="btn btn-primary" value="update" onclick="updateCart(this)" name="btn">
+                                                <input type="submit" class="btn btn-primary" value="update" id="myButton" onclick="updateCart(this)" name="btn">
                                               
                                             </td>
-                                     
-                                            <td data-th="Subtotal" class="text-center">{{$total = $v_cart->price * $v_cart->qty }}BDT</td>
-                                            {{-- <td data-th="Subtotal" class="text-center">{{$total = $v_cart->price * $v_cart->qty }}BDT</td> --}}
+                                            <td data-th="Subtotal" class="text-center">{{$v_cart->options->discount}}BDT</td>
 
+                                            <td data-th="Subtotal" class="text-center">{{$total = $v_cart->price * $v_cart->qty }}BDT</td>
                                             <td class="actions" data-th="">
-                                                {{-- <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button> --}}
+                                                <button class="btn btn-info btn-sm" id="decrease" onclick="decreaseValue()" ><i class="fas fa-minus"></i></button>
                                                 <a href="{{route('delete-cart',['id' => $v_cart->rowId ])}}"  class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                                                <button class="btn btn-info btn-sm" id="increase" onclick="increaseValue()"><i class="fas fa-plus"></i></button>
+
 
                                             </td>
                                         </tr>
@@ -111,6 +113,8 @@
                                         {{-- {{$vat = 0}} --}}
                                         <br/>
                                         {{-- <td class="hidden-xs text-center"><strong>garnd total{{$ordertotal = $sum+$vat}}BDT</strong></td> --}}
+                                        {{-- <td class="hidden-xs text-center"><strong>Discount-{{Cart::discount()}}BDT</strong></td> --}}
+                                    </br>
 
                                         <td class="hidden-xs text-center"><strong>Total-{{$ordertotal = Cart::priceTotal()}}BDT</strong></td>
 
@@ -413,6 +417,47 @@
     </script>
     <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
     <script src="{{asset('client/assets/js/custom/api.js')}}"></script>
+
+    <script> 
+        // $(document).ready(function(){
+        // setInterval(function(){
+        //       $("#here").load(window.location.href + " #here" );
+        // }, 3);
+        // });
+
+        let auto_refresh =
+            setInterval(function(){
+              $("#here").load(window.location.href + " #here" );
+        },10000);
+        
+
+
+         </script>
+
+    {{-- <script language="javascript">
+    setTimeout(function(){
+       window.location.reload(1);
+    }, 7000);
+    </script> --}}
+
+    
+</script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+    {{-- <script type="text/javascript">
+    var auto_refresh = setInterval(
+    function () {
+        $('#div').load('#div');
+    }, 3);
+    </script> --}}
+
+{{-- <script src="http://code.jquery.com/jquery-latest.js">
+    // <script type="text/javascript">
+    //   setInterval("my_function();",3); 
+    //   function my_function(){
+    //     $('#myrefresh').load(cart.blade.php);
+    //   }
+    </script> --}}
+    
 
 
 @endsection

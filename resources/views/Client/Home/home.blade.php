@@ -66,13 +66,14 @@
                                                     <img src="{{asset($product->product_image)}}"
                                                          class="img-responsive img-fluid" alt="">
                                                 </div>
-                                                <form action="{{route('add-to-cart')}}" method="post">
-                                                    @csrf
+                                                {{-- <form> --}}
+                                                    {{-- @csrf --}}
                                                     <div class="thumb-content">
                                                         <h4>{{$product->product_name}}</h4>
                                                         <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
-                                                        <input type="hidden" name="qty" value="1" min="1" />
-                                                        <input type="hidden" name="id" value="{{$product->id}}"  />
+                                                        <input type="hidden" name="id" id ="proid" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="qty" id="qty" value="1" min="1" />
+                                                        
                                                         <div class="star-rating">
                                                             <ul class="list-inline">
                                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -83,9 +84,9 @@
                                                             </ul>
                                                         </div>
                                                         {{-- <a href="cart.html" class="btn btn-primary">Add to Cart</a> --}}
-                                                        <button type="submit" class="btn btn-primary" name="btn" id="cartbtn" value='add-to-cart'>Add to Cart</button>
+                                                        <button type="submit" class="btn btn-primary" name="btn" id="cartbtn" onclick="addToCart(this)"  value='add-to-cart'>Add to Cart</button>
                                                     </div>
-                                                </form>
+                                                {{-- </form> --}}
                                             </div>
                                         </div>
                                     @endforeach
@@ -101,12 +102,12 @@
                                                     <img src="{{asset($product->product_image)}}"
                                                          class="img-responsive img-fluid" alt="">
                                                 </div>
-                                                <form action="{{route('add-to-cart')}}" method="post">
+                                                {{-- <form action="{{route('add-to-cart')}}" method="post"> --}}
                                                     <div class="thumb-content">
                                                         <h4>{{$product->product_name}}</h4>
                                                         <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
-                                                        <input type="hidden" value="{{$product->id}}">
-                                                        <input type="hidden" value="1" min="1" name="qty">
+                                                        <input type="hidden" id="proid"value="{{$product->id}}">
+                                                        <input type="hidden" id="qty" value="1" min="1" name="qty">
                                                         <div class="star-rating">
                                                             <ul class="list-inline">
                                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -116,9 +117,9 @@
                                                                 <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                         </div>
-                                                        <button  class="btn btn-primary">Add to Cart</button>
+                                                        <button  class="btn btn-primary"  onclick="addToCart(this)">Add to Cart</button>
                                                     </div>
-                                                </form>
+                                                {{-- </form> --}}
                                             </div>
                                         </div>
                                     @endforeach
@@ -139,6 +140,8 @@
                                                 <div class="thumb-content">
                                                     <h4>{{$product->product_name}}</h4>
                                                     <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
+                                                    <input type="hidden" id="proid" value="{{$product->id}}"/>
+                                                    <input type="hidden" id="qty" value="{{$product->id}}"/>
                                                     <div class="star-rating">
                                                         <ul class="list-inline">
                                                             <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -148,7 +151,7 @@
                                                             <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                         </ul>
                                                     </div>
-                                                    <a href="" class="btn btn-primary">Add to Cart</a>
+                                                    <button  class="btn btn-primary"  onclick="addToCart(this)">Add to Cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,8 +245,8 @@
                         @foreach($products as $product)
 
                             <div class="col-sm-3">
-                                <form action="{{route('add-to-cart')}}" method="post">
-                                    @csrf
+                                {{-- <form action="{{route('add-to-cart')}}" method="post"> --}}
+                                    {{-- @csrf --}}
                                     <div class="shop-box">
                                         <img class="img-full img-responsive" src="{{asset($product->product_image)}}"
                                              alt="shop">
@@ -256,10 +259,10 @@
                                                     </a>
 
                                                     {{-- <input type="hidden" value="{{$product->product_name}}"> --}}
-                                                    <input type="hidden" value="{{$product->id}}" name="id">
-                                                    <input type="hidden" value="1" min="1" name="qty">
+                                                    <input type="hidden" id="proid"value="{{$product->id}}" name="id">
+                                                    <input type="hidden" id="qty"value="1" min="1" name="qty">
                                                     <h4>{{$product->product_name}}</h4>
-                                                    <button >
+                                                    <button onclick="addToCart(this)">
                                                         <span class="ion-ios-cart"></span>
                                                     </button>
 
@@ -288,7 +291,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                </form>
+                                {{-- </form> --}}
                             </div>
 
 
@@ -339,4 +342,7 @@
 
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
+
+    {{-- <script src="{{asset('client/assets/js/custom/api.js')}}"></script> --}}
 @endsection
