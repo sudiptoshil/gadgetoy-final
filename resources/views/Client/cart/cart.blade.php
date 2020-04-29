@@ -58,18 +58,18 @@
         
                                             <td data-th="Quantity">
                                                 
-                                                <input type="number" class="form-control text-center" id="qty" name="qty" value="{{$v_cart->qty}}">
-                                                <input type="hidden" class="form-control text-center" id="rowId" name="rowId" value="{{$v_cart->rowId}}">
-                                                <input type="submit" class="btn btn-primary" value="update" id="myButton" onclick="updateCart(this)" name="btn">
+                                                <input type="number" class="form-control text-center" id="qty-{{$v_cart->rowId}}" name="qty" value="{{$v_cart->qty}}">
+                                                <input type="hidden" class="form-control text-center" id="rowId-{{$v_cart->rowId}}" name="rowId" value="{{$v_cart->rowId}}">
+                                                {{-- <input type="submit" class="btn btn-primary" value="update" id="myButton" onclick="updateCart(this)" name="btn"> --}}
                                               
                                             </td>
                                             <td data-th="Subtotal" class="text-center">{{$v_cart->options->discount}}%</td>
 
                                             <td data-th="Subtotal" class="text-center">{{$total = $v_cart->price * $v_cart->qty }}BDT</td>
                                             <td class="actions" data-th="">
-                                                <button class="btn btn-info btn-sm" id="decrease" onclick="decreaseValue()" ><i class="fas fa-minus"></i></button>
+                                                <button data-id="{{$v_cart->rowId}}" class="btn btn-info btn-sm" id="decrease" onclick="decreaseValue(this)" ><i class="fas fa-minus"></i></button>
                                                 <a href="{{route('delete-cart',['id' => $v_cart->rowId ])}}"  class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
-                                                <button class="btn btn-info btn-sm" id="increase" onclick="increaseValue()"><i class="fas fa-plus"></i></button>
+                                                <button data-id="{{$v_cart->rowId}}" class="btn btn-info btn-sm" id="increase" onclick="increaseValue(this)"><i class="fas fa-plus"></i></button>
 
 
                                             </td>
@@ -134,8 +134,8 @@
                             </div>
 
                             <!--cart panel ends-->
-
-                            </form---------------->
+                            @if(Session::get('client_id'))
+                            {{-- </form----------------> --}}
                             <!--single form panel shipping details panel-->
                             <div class="multisteps-form__panel p-4 rounded bg-white" data-animation="scaleIn">
                                 <h3 class="multisteps-form__title text-center">Shipping Details</h3>
@@ -202,13 +202,14 @@
                                 </div>
                             </div>
                             <!--shipping details panel ends-->
-
+                          
 
                             <!--single form panel payment method panel-->
                             <div class="multisteps-form__panel p-4 rounded bg-white" data-animation="scaleIn">
                                 <h3 class="multisteps-form__title text-center">Payment Method</h3>
                                 <div class="multisteps-form__content">
                                     <div class="row">
+                                        <form>
                                         <div class="col-12 mt-4 div_payment_radio">
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input payment_type" value="1" id="credit" name="payment_type" checked required>
@@ -219,7 +220,7 @@
                                                 <input type="radio" class="form-check-input payment_type" value='2' id="debit" name="payment_type" required>
                                                 <label for="debit" class="form-check-label">Debit Card</label>
                                             </div>
-
+                                            
                                             <div class="form-check">
                                                 <input type="radio" class="form-check-input payment_type" value="3" id="paypal" name="payment_type"  required>
                                                 <label for="paypal" class="form-check-label">PayPal</label>
@@ -229,7 +230,7 @@
                                                 <input type="radio" class="form-check-input payment_type"  value="4" id="bkash" name="payment_type"  required>
                                                 <label for="bkash" class="form-check-label">bkash</label>
                                             </div>
-
+                                        </form>
                                             <div class="row mt-4">
                                                 <div class="col-md-6 form-group">
                                                     <label for="card-name">Name on card</label>
@@ -296,8 +297,16 @@
                                 </div>
                             </div>
                             <!--additional comments panel ends-->
+                            @else
+                           <div align="center" >
+                            <h2 >you have login first for shopping</h2>
+                            <a  href="{{route('client-login')}}">Signin</a>
+                            OR
+                            <a  href="{{route('client-register')}}">Signup</a>
+                           </div>
 
-
+                            @endif
+                         
                     </div>
                 </div>
             </div>

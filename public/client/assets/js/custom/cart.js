@@ -21,12 +21,23 @@ const isValidStep = (activePanelNum,eventTarget,DOMstrings) =>{
     else if(activePanelNum == '1')
         {
             let name=$("#firstname").val();
+            let lastname=$("#lastname").val();
             let address=$("#txt_cart_address").val();
-
+            let email=$("#email").val();
+            let phonenumber=$("#phonenumber").val();
+            let postcode=$("#postcode").val();
+            
+            
             if(name == '')
                 alert("Name is required");
             else if(address == '')
                 alert("Address is required...");
+            else if(lastname == '')
+                alert("last name is required...");
+            else if(email == '')
+                alert("email is required...");
+            else if(postcode == '')
+                alert("post code is required...");
             else{
                 isActiveNextStep(activePanelNum,eventTarget,DOMstrings);
    
@@ -106,50 +117,78 @@ function orderCheckout(v){
 
 
 // ------------------------------------------
-function increaseValue() {
-    var value = parseInt(document.getElementById('qty').value, 10);
+function increaseValue(v) {
+    let id = $(v).attr("data-id");
+    let value = parseInt(document.getElementById('qty-'+id).value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
-    document.getElementById('qty').value = value;
+    document.getElementById('qty-'+id).value = value;
+    let rowId=$("#rowId-"+id).val();
+    let qty=$("#qty-"+id).val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: './update-cart',
+        type: 'POST',
+        data: {increment: true,qty:qty,rowId:rowId},
+        success: function() { alert('cart quantity is increased successfully!!') }
+    });
 
   }
 
 
+
   
-  function decreaseValue() {
-    var value = parseInt(document.getElementById('qty').value, 10);
+  function decreaseValue(v) {
+    let id = $(v).attr("data-id");
+    let value = parseInt(document.getElementById('qty-'+id).value, 10);
     value = isNaN(value) ? 0 : value;
     value < 1 ? value = 1 : '';
     value--;
-    document.getElementById('qty').value = value;
+    document.getElementById('qty-'+id).value = value;
+    
+    let rowId=$("#rowId-" +id).val();
+    let qty=$("#qty-" +id).val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url: './update-cart',
+        type: 'POST',
+        data: {increment: true,qty:qty,rowId:rowId},
+        success: function() { alert('cart quantity is decreased successfully!!') }
+    });
 
 
   }
 
 // ------------------------------------------
 
-// $(document).ready(function(){
-//     setInterval(function(){
-//           $("#here").load(window.location.href + " #here" );
-//     }, 3);
-//     });
-
 
 function addToCart(v){
-    let proid=$("#proid").val();
-    let qty=$("#qty").val();
-    // alert(id);
+    let id = $(v).attr("data-id");
+    let proid=$("#proid-"+id).val();
+    let qty=$("#qty-"+id).val();
+    
+    // alert(proid);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // alert(rowId);
+ 
     $.ajax({
         type: 'POST',
         //dataType: 'json',
         url: "./add-to-cart",
-        data: {proid:proid,qty:qty},
+        data: {id:id,proid:proid,qty:qty},
         success: function (data) {
         alert("cart added successfully!!");
         }
@@ -157,28 +196,28 @@ function addToCart(v){
 }
 
 
-function updateCart(v){
+// function updateCart(v){
    
-    let rowId=$("#rowId").val();
-    let qty=$("#qty").val();
+//     let rowId=$("#rowId").val();
+//     let qty=$("#qty").val();
    
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    // alert(rowId);
-    $.ajax({
-        type: 'POST',
-        //dataType: 'json',
-        url: "./update-cart",
-        data: {rowId:rowId,qty:qty},
-        success: function (data) {
-        alert("cart updated successfully!!");
-        }
-    });
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     // alert(rowId);
+//     $.ajax({
+//         type: 'POST',
+//         //dataType: 'json',
+//         url: "./update-cart",
+//         data: {rowId:rowId,qty:qty},
+//         success: function (data) {
+//         alert("cart updated successfully!!");
+//         }
+//     });
         
-}
+// }
 
 const isActiveNextStep=(activePanelNum,eventTarget,DOMstrings)=>{
     if (eventTarget.classList.contains(`${DOMstrings.stepPrevBtnClass}`)) {

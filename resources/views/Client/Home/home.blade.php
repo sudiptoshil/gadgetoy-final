@@ -71,8 +71,8 @@
                                                     <div class="thumb-content">
                                                         <h4>{{$product->product_name}}</h4>
                                                         <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
-                                                        <input type="hidden" name="id" id ="proid" value="{{$product->id}}"/>
-                                                        <input type="hidden" name="qty" id="qty" value="1" min="1" />
+                                                        <input type="hidden" name="id" id ="proid-{{$product->id}}" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="qty" id="qty-{{$product->id}}" value="1" min="1" />
                                                         
                                                         <div class="star-rating">
                                                             <ul class="list-inline">
@@ -84,7 +84,7 @@
                                                             </ul>
                                                         </div>
                                                         {{-- <a href="cart.html" class="btn btn-primary">Add to Cart</a> --}}
-                                                        <button type="submit" class="btn btn-primary" name="btn" id="cartbtn" onclick="addToCart(this)"  value='add-to-cart'>Add to Cart</button>
+                                                        <button data-id="{{$product->id}}"type="submit" class="btn btn-primary" name="btn" id="cartbtn" onclick="addToCart(this)"  value='add-to-cart'>Add to Cart</button>
                                                     </div>
                                                 {{-- </form> --}}
                                             </div>
@@ -106,8 +106,8 @@
                                                     <div class="thumb-content">
                 
                                                         <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
-                                                        <input type="hidden" id="proid"value="{{$product->id}}">
-                                                        <input type="hidden" id="qty" value="1" min="1" name="qty">
+                                                        <input type="hidden" name="id" id ="proid-{{$product->id}}" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="qty" id="qty-{{$product->id}}" value="1" min="1" />
                                                         <div class="star-rating">
                                                             <ul class="list-inline">
                                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -117,7 +117,7 @@
                                                                 <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                             </ul>
                                                         </div>
-                                                        <button  class="btn btn-primary"  onclick="addToCart(this)">Add to Cart</button>
+                                                        <button data-id='{{$product->id}}' type="submit" class="btn btn-primary" name="btn" id="cartbtn" onclick="addToCart(this)"  value='add-to-cart'>Add to Cart</button>
                                                     </div>
                                                 {{-- </form> --}}
                                             </div>
@@ -140,8 +140,8 @@
                                                 <div class="thumb-content">
                                                    
                                                     <p class="item-price"><span>BDT {{$product->product_price}}</span></p>
-                                                    <input type="hidden" id="proid" value="{{$product->id}}"/>
-                                                    <input type="hidden" id="qty" value="{{$product->id}}"/>
+                                                    <input type="hidden" name="id" id ="proid-{{$product->id}}" value="{{$product->id}}"/>
+                                                        <input type="hidden" name="qty" id="qty-{{$product->id}}" value="1" min="1" />
                                                     <div class="star-rating">
                                                         <ul class="list-inline">
                                                             <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -151,7 +151,7 @@
                                                             <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                         </ul>
                                                     </div>
-                                                    <button  class="btn btn-primary"  onclick="addToCart(this)">Add to Cart</button>
+                                                    <button data-id='{{$product->id}}' type="submit" class="btn btn-primary" name="btn" id="cartbtn" onclick="addToCart(this)"  value='add-to-cart'>Add to Cart</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -258,11 +258,11 @@
                                                         <span class="ion-ios-information"></span>
                                                     </a>
 
-                                                    {{-- <input type="hidden" value="{{$product->product_name}}"> --}}
-                                                    <input type="hidden" id="proid"value="{{$product->id}}" name="id">
-                                                    <input type="hidden" id="qty"value="1" min="1" name="qty">
+                                                    {{-- <input type="hidden" id = "proname"value="{{$product->product_name}}"> --}}
+                                                <input type="hidden" id="proid-{{$product->id}}" value="{{$product->id}}" name="proid">
+                                                <input type="hidden" id="qty-{{$product->id}}"   value="1" min="1" name="qty">
                                                     
-                                                    <button onclick="addToCart(this)">
+                                                <button data-id="{{$product->id}}" onclick="addToCart(this)">
                                                         <span class="ion-ios-cart"></span>
                                                     </button>
 

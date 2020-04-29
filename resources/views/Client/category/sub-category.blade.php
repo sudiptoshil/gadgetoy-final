@@ -108,12 +108,13 @@
                                     <div class="c-table">
                                         <div class="c-cell">
                                             <h4>{{$product->product_name}}</h4>
-                                            <input type="hidden" id="proid" name="proid" value="{{$product->id}}">
-                                            <input type="hidden" id="qty" name="qty" value="1" value="min">
+                                          
                                             <a href="{{route('product',['id'=>$product->id,'category_id'=>$product->category_id])}}">
                                                 <span class="ion-ios-information"></span>
                                             </a>
-                                            <button onclick="addToCart(this)">
+                                            <input type="hidden" id="proid-{{$product->id}}" name="proid" value="{{$product->id}}">
+                                            <input type="hidden" id="qty-{{$product->id}}" name="qty" value="1" value="min">
+                                            <button data-id="{{$product->id}}" onclick="addToCart(this)">
                                                 <span class="ion-ios-cart"></span>
                                             </button>
                                         </div>
@@ -180,7 +181,7 @@
         </div>
     </section>
     <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
-    <script src="{{asset('client/assets/js/custom/api.js')}}"></script>
+    {{-- <script src="{{asset('client/assets/js/custom/api.js')}}"></script> --}}
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 

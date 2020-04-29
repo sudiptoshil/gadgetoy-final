@@ -329,7 +329,7 @@
                                     <a href="product-details.html">
                                         <span class="ion-ios-information"></span>
                                     </a>
-                                    <a href="cart.html">
+                                    <a href="">
                                         <span class="ion-ios-cart"></span>
                                     </a>
                                 </div>
@@ -368,7 +368,7 @@
                                     <a href="product-details.html">
                                         <span class="ion-ios-information"></span>
                                     </a>
-                                    <a href="cart.html">
+                                    <a href="">
                                         <span class="ion-ios-cart"></span>
                                     </a>
                                 </div>
@@ -464,8 +464,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="col">
                                 <div class="">
                                     <div class="">
@@ -533,9 +531,11 @@
                                         <a href="{{route('product',['id'=>$product->id,'category_id'=>$product->category_id])}}">
                                             <span class="ion-ios-information"></span>
                                         </a>
-                                        <a href="cart.html">
+                                    <input type="hidden" id="proid-{{$product->id}}" value="{{$product->id}}">
+                                    <input type="hidden" id="qty-{{$product->id}}" value="1" min="1">
+                                    <button data-id="{{$product->id}}">
                                             <span class="ion-ios-cart"></span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -599,9 +599,9 @@
 
     </script>
   <script src="{{asset('client/assets/js/custom/cart.js')}}"></script>
-  <script src="{{asset('client/assets/js/custom/api.js')}}"></script>
+  {{-- <script src="{{asset('client/assets/js/custom/api.js')}}"></script> --}}
   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-
+  
 
 @endsection
 
