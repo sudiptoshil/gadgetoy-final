@@ -299,7 +299,7 @@
                             <!--additional comments panel ends-->
                             @else
                            <div align="center" >
-                            <h2 >you have login first for shopping</h2>
+                            <h2 >you have to login first for continue shopping</h2>
                             <a  href="{{route('client-login')}}">Signin</a>
                             OR
                             <a  href="{{route('client-register')}}">Signup</a>
