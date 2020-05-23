@@ -25,6 +25,9 @@ Route::get('/product/details/{id}/{category_id}', 'Client\ClientController@produ
 Route::get('/client-login', 'Client\CheckoutController@login')->name('client-login');
 Route::post('/login-process', 'Client\CheckoutController@loginProcess')->name('login-process');
 Route::get('/client-register', 'Client\CheckoutController@register')->name('client-register');
+Route::get('/verifyemailfirst', 'Client\CheckoutController@verify_email_first')->name('verifyemailfirst');
+Route::get('/verify/{email}/{varify_token}', 'Client\CheckoutController@send_email_done')->name('sendemaildone');
+
 Route::post('/registration-process', 'Client\CheckoutController@registerProcess')->name('registration-process');
 Route::get('/client-logout', 'Client\CheckoutController@logout')->name('client-logout');
 Route::get('/about/', 'Client\ClientController@about')->name('about');
